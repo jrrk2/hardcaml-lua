@@ -265,9 +265,11 @@ type t =
 | Lit of atom
 | Comb of combinator * t list [@@deriving yojson]
 
-let make signal = Made signal
-let string_of_signal signal = ""
-let pp buf itm = ()
+let string_of_signal = function
+| PWR -> "PWR"
+| GND -> "GND"
+| SCALAR string -> string
+| INDEXED (string, int) -> string ^ "[" ^ string_of_int int ^ "]"
 
 let cnv_atom = function
 | (Made PWR) -> Msat_tseitin.MakeCNF.f_true
@@ -293,12 +295,14 @@ let make_xor a b = Comb(Xor, [a;b])
 let make_not a = Comb(Not, [a])
 let make_atom msignal = Lit msignal
 let make_cnf q = Msat_tseitin.MakeCNF.make_cnf (msatexpr q)
+let make signal = Made signal
 
 let f_false = Lit (Made GND)
 let f_true = Lit (Made PWR)
 
 let transparent = Msat_sat_slit.String_lit.transparent
 let fresh = Msat_sat_slit.String_lit.fresh
+let pp = Msat_sat_slit.String_lit.pp
 
 end
 

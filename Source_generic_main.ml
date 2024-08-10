@@ -225,8 +225,8 @@ let cmp_sat (hlst, inffoplst, wlst) (hlst', inffoplst', wlst') =
   let status = ref true in
   let inffoplst1,inffoplst2 = List.split inffoplst in
   let inffoplst1',inffoplst2' = List.split inffoplst' in
-  print_endline ("Golden (yosys) primary inputs/flipflop inputs/final outputs: "^String.concat "; " (List.map E.string_of_signal inffoplst1));
-  print_endline ("Revised (our) primary inputs/flipflop inputs/final outputs: "^String.concat "; " (List.map E.string_of_signal inffoplst1'));
+  print_endline ("Golden primary inputs/flipflop inputs/final outputs: "^String.concat "; " (List.map E.string_of_signal inffoplst1));
+  print_endline ("Revised primary inputs/flipflop inputs/final outputs: "^String.concat "; " (List.map E.string_of_signal inffoplst1'));
   print_string ("Endpoint comparison: ");
   List.iter (fun (k, itm) ->
       let k' = E.string_of_signal k in
