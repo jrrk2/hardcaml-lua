@@ -186,7 +186,6 @@ let mycnf' = ref F.f_false
 let mycnf = ref [[E.transparent (E.fresh ())]]
 let othh = ref F.f_false
 let othsat = ref []
-let sath = Hashtbl.create 257
 
 let ep k' form =
     if verbose then print_endline "Dumping cnf";
@@ -194,7 +193,6 @@ let ep k' form =
     if verbose then print_endline "Building cnf";
     let m = F.make_cnf form in
     if verbose then mycnf := List.map (List.map E.transparent) m;
-    Hashtbl.add sath k' m;
     let solver = Msat_sat_slit.create () in
     Msat_sat_slit.assume solver m ();
     match Msat_sat_slit.solve solver with

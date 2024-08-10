@@ -237,8 +237,72 @@ type rw =
   | Xor of rw * rw
  [@@deriving yojson]
 
+(*
 module E = Msat_sat_slit.String_lit (* expressions *)
 module F = Msat_tseitin.MakeCNF
+*)
+
+module F = struct
+
+type combinator =
+| And
+| Or
+| Imp
+| Not
+| Xor [@@deriving yojson]
+
+type signal =
+| PWR
+| GND
+| SCALAR of string
+| INDEXED of string * int [@@deriving yojson]
+
+type atom =
+| Fresh of int
+| Made of signal [@@deriving yojson]
+
+type t =
+| Lit of atom
+| Comb of combinator * t list [@@deriving yojson]
+
+let make signal = Made signal
+let string_of_signal signal = ""
+let pp buf itm = ()
+
+let cnv_atom = function
+| (Made PWR) -> Msat_tseitin.MakeCNF.f_true
+| (Made (SCALAR a)) -> Msat_tseitin.MakeCNF.Lit (false, Made (SCALAR a))
+| (Made (INDEXED (a,ix))) -> Msat_tseitin.MakeCNF.Lit (false, Made (INDEXED (a,ix)))
+| (Made GND) -> Msat_tseitin.MakeCNF.f_false
+| (Fresh n) -> Msat_tseitin.MakeCNF.Lit (false, Fresh n)
+
+let rec msatexpr = function
+| Lit x -> cnv_atom x
+| Comb (And, lst) -> Msat_tseitin.MakeCNF.make_and (List.map (msatexpr) lst)
+| Comb (Or, lst) -> Msat_tseitin.MakeCNF.make_or (List.map (msatexpr) lst)
+| Comb (Xor, [a;b]) -> Msat_tseitin.MakeCNF.make_xor (msatexpr a) (msatexpr b)
+| Comb (Xor, _) -> failwith "Xor"
+| Comb (Imp, [a;b]) -> Msat_tseitin.MakeCNF.make_imply (msatexpr a) (msatexpr b)
+| Comb (Imp, _) -> failwith "Imp"
+| Comb (Not, [rght]) -> Msat_tseitin.MakeCNF.make_not (msatexpr rght)
+| Comb (Not, _) -> failwith "Not"
+
+let make_and l = Comb(And, l)
+let make_or l = Comb(Or, l)
+let make_xor a b = Comb(Xor, [a;b])
+let make_not a = Comb(Not, [a])
+let make_atom msignal = Lit msignal
+let make_cnf q = Msat_tseitin.MakeCNF.make_cnf (msatexpr q)
+
+let f_false = Lit (Made GND)
+let f_true = Lit (Made PWR)
+
+let transparent = Msat_sat_slit.String_lit.transparent
+let fresh = Msat_sat_slit.String_lit.fresh
+
+end
+
+module E = F
 
 type ind = {
   wires:(E.signal * F.t option) list ref;
