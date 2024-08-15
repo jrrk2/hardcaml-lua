@@ -1,4 +1,7 @@
-open Source_text_verible
+(*
+ open Source_text_verible
+ *)
+
 open Source_text_rewrite_types
 
 type othtran =
@@ -284,7 +287,9 @@ let py () = print_endline (Format.asprintf "%a" pp !othytok);;
 let fail_json to_yojson x = let y = strip_json_typ (to_yojson x) in othyt := y; print_endline (Format.asprintf "%a" pp y)
 
 let failothtran = fail_json othtran_to_yojson
-let failtoken = fail_json token_to_yojson
+(*
+ let failtoken = fail_json token_to_yojson
+ *)
 let failind = fail_json ind_to_yojson
 
 let fail' msg x = failothtran x; failwith msg

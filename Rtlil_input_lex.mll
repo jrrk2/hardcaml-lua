@@ -17,9 +17,7 @@
 (**************************************************************************)
 
 {
-  open Lexing
   open Rtlil_input
-  open Rtlil_input_types
 
   let verbose = try int_of_string(Sys.getenv "LEXER_VERBOSE") > 0 with _ -> false
   let lincnt = ref 0

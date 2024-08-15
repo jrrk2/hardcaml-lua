@@ -1,4 +1,3 @@
-open Printf
 open Generic_rewrite
 open Rtlil_input_rewrite_types
 open Source_text_rewrite_types

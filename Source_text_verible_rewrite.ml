@@ -1,5 +1,4 @@
 open Source_text_verible_rewrite_types
-open Source_text_verible_lex
 open Source_text_verible
 
 let othcons = ref End_of_file

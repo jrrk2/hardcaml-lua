@@ -17,9 +17,7 @@
 (**************************************************************************)
 
 {
-  open Lexing
   open Source_text_verible
-  open Source_text_verible_types
 
   let deflate token = 
     let q = Queue.create () in

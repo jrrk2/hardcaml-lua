@@ -1,8 +1,8 @@
 (*
 open Source_text_lex
 open Source_text
-*)
 open Input_types
+*)
 open Rtlil_input_rewrite_types
 open Source_text_verible_rewrite_types
 open Printf
@@ -1201,7 +1201,7 @@ let sub' x =
    Hashtbl.iter (fun k x -> dbgsubst := (k,x) :: !dbgsubst) subst';
    pass3
 
-let rec vexpr typhash = function
+let vexpr typhash = function
 | oth -> unhand := Some oth; failwith "vexpr"
 
 and cexpr typhash = function
@@ -1269,7 +1269,7 @@ let addmem bufh typhash first_last_lst wid' = function
     begin
     let (off', siz') = List.split (memsiz typhash first_last_lst) in
     let rec tot = function [] -> 1 | hd::tl -> hd * tot tl in
-    let rec off = function [] -> 0 | hd::tl -> hd + tot tl in
+    let off = function [] -> 0 | hd::tl -> hd + tot tl in
     let tot' = tot siz' in
     let options = Memory_optionsoffset (off off') :: Memory_optionssize (tot') :: Memory_optionswidth wid' :: [] in
     update typhash (Id mem) (Vmem {off=off';siz=siz';wid=wid';tot=tot'});

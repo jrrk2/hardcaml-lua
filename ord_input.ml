@@ -90,3 +90,4 @@ let getstr = function
 | TUPLE9 _-> uppercase_ascii("TUPLE9") 
 | UNDERSCORE -> uppercase_ascii("UNDERSCORE") 
 | VBAR -> uppercase_ascii("VBAR") 
+| other -> "OTHER"

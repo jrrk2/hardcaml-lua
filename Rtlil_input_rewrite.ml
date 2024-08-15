@@ -1,7 +1,6 @@
 open Rtlil_input_lex
 open Rtlil_input_rewrite_types
 open Rtlil_input
-open Printf
 
 let unhand = ref None
 let othrw = ref (TLIST [])

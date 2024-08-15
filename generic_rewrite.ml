@@ -61,7 +61,7 @@ let notsupp kind lst = failwith ("Not supported: "^kind)
 
 let getstr x = failwith "getstr"
 
-let rec rw x = failwith ("rw fail")
+let rw x = failwith ("rw fail")
 
 (*
 (* for plain Verilog reading without pre-proc only *)

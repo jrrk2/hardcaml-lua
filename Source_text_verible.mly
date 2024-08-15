@@ -1,5 +1,4 @@
 %{
-  open Parsing
   open Source_text_verible_types
   let stderr = open_out "parser_stderr.log" (* to capture parser trace mode info *)
   let declst = ref []
@@ -92,6 +91,10 @@
 %token <token*token*token> CONS3
 %token <token*token*token*token> CONS4
 %token <token*token*token*token*token> CONS5
+%token <token*token*token*token*token*token> CONS6
+%token <token*token*token*token*token*token*token> CONS7
+%token <token*token*token*token*token*token*token*token> CONS8
+%token <token*token*token*token*token*token*token*token*token> CONS9
 %token  Case
 %token  Casex
 %token  Casez

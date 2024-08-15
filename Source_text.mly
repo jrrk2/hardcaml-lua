@@ -1,5 +1,4 @@
 %{
-  open Parsing
   open Source_text_types
   let stderr = open_out "parser_stderr.log" (* to capture parser trace mode info *)
   let declst = ref []

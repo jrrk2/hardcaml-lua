@@ -442,7 +442,7 @@ Videntifier_optional_unpacked_dimensions1 id
       decl_variable_dimension1,
       unqualified_id1,
       EMPTY_TOKEN) -> Vdata_type_or_implicit_basic_followed_by_id_and_dimensions_opt3 (Vsigned, pat decl_variable_dimension1, pat unqualified_id1)
-| oth -> othpat' := oth; failtoken oth; try failwith "pat" with _ -> Printexc.print_backtrace stdout; Vempty
+| oth -> othpat' := oth; (* failtoken oth; *) try failwith "pat" with _ -> Printexc.print_backtrace stdout; Vempty
 
 and patlst lst = Vtlist (List.map pat lst)
 

@@ -1,6 +1,4 @@
 %{
-  open Parsing
-  open Output_types
 let getstr = function
 | END  -> "END"
 | LINEFEED  -> "LINEFEED"
@@ -953,7 +951,7 @@ busbitchars: K_BUSBITCHARS QSTRING SEMICOLON { TUPLE3(K_BUSBITCHARS,QSTRING $2,S
 
 rules: /* empty */ { EMPTY_TOKEN }
 	|	rules rule { TUPLE2($1,$2) }
-	|	error { failwith "parse_error" ) }
+	|	error { failwith "parse_error" }
 
 end_library: /* empty */ { EMPTY_TOKEN }
 	|	K_END K_LIBRARY { TUPLE2(K_END,K_LIBRARY) }
