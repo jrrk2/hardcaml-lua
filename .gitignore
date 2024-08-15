@@ -107,7 +107,6 @@ junk.v
 .DS_Store
 logfile.txt
 Input.mly.old
-Input_dump.ml
 Input_types.mli
 Rtlil_input.ml
 Rtlil_input.mli
