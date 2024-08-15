@@ -432,8 +432,8 @@ and _chk_arith itms op = function
 | oth -> othargs := oth; failwith "_chk_arith othargs"
 
 and map' rtl =
-let nam = Filename.temp_file ~temp_dir:"." "arith_" ".v" in
-let fd = open_out nam in output_string fd rtl; close_out fd;
+let verbose = try int_of_string (Sys.getenv "RTL_MAP_VERBOSE") > 0 with _ -> false in
+if verbose then (let fd = open_out (Filename.temp_file ~temp_dir:"." "arith_" ".v") in output_string fd rtl; close_out fd);
 let lexbuf = Lexing.from_string rtl in
 let rslt = Rtl_parser.start Rtl_lexer.token lexbuf in
 rslt
