@@ -140,12 +140,14 @@ let lreadlib lib =
   hadd (Lib (liberty, cells))
 
 let lnam itm =
-  match Hashtbl.find lhash itm with
+  let nam = match Hashtbl.find lhash itm with
   | Cnvlst (nam, itms) -> nam
   | Rtlil (nam, itms) -> nam
   | Lib (nam, itms) -> nam
   | Rtl (nam, itms) -> nam
-  | Sat itms -> itm
+  | Sat itms -> itm in
+  print_endline nam;
+  if nam.[0]='\\' then String.sub nam 1 (String.length nam-1) else nam
 
 let ldump stem itm =
   match Hashtbl.find lhash itm with
