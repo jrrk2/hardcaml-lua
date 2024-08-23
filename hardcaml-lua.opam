@@ -10,7 +10,6 @@ authors: ["Jonathan Kimmitt"]
 license: "MIT"
 tags: ["Verilator" "Surelog" "UHDM" "Verible" "Yosys" "RTLIL"]
 homepage: "https://github.com/jrrk2/vpiparse"
-doc: "https://github.com/jrrk2/vpiparse.git"
 bug-reports: "https://github.com/jrrk2/vpiparse/issues"
 depends: [
   "dune" {>= "3.7"}

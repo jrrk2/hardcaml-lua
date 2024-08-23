@@ -15,8 +15,6 @@
 
 (license MIT)
 
-(documentation https://github.com/jrrk2/vpiparse.git)
-
 (package
  (name hardcaml-lua)
  (allow_empty)
