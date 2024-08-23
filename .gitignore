@@ -130,3 +130,4 @@ Rtlil_input_old.mly
 Source_text_convert_liberty_top
 Rtlil_input_types.mli
 Source_text_verible_types.mli
+_build/
