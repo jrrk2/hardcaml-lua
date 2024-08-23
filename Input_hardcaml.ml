@@ -444,7 +444,9 @@ let rec tranitm attr = function
 | CNST (w, SHEX n) -> Unary(Signed, Hex (string_of_int n, w)) (* TBC *)
 | BGN (_, rw::[]) -> tranitm attr rw
 | BGN (_, rw_lst) -> Seq (List.map (tranitm attr) rw_lst)
+(*
 | BGN (_, rw_lst) -> failwith "BGN"
+*)
 | CS (str1, expr :: cslst) as cs -> othcs := Some cs; let expr' = tranitm attr expr in
 Case (expr', List.map (function
   | CSITM ("", (CNST _ as cexp) :: stmt :: []) -> Item (tranitm attr cexp, tranitm attr stmt)
