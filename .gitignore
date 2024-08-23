@@ -19,7 +19,6 @@
 *.templog
 *.tmp
 *.sat
-*.liberty
 *.debug
 *.tok
 *_opt.v
@@ -43,14 +42,12 @@ output_parser.ml
 output_parser.mli
 outputparser
 outputparser.top
-Input_top
 Input.ml
 Input.mli
 Input_lex.ml
 Input_ord.ml
 liberty_parser.y
 liberty_parser.tab.c
-NangateOpenCellLibrary_typical.lib
 Program
 Program.top
 Program.mly
@@ -85,10 +82,8 @@ Source_text.ml
 Source_text.mli
 Source_text.mly.orig
 Source_text_lex.ml
-Source_text_top
 Source_text.mly.edited
 Source_text_convert
-Source_text_convert_top
 Source_text_preproc
 Source_text_preproc_lexer.ml
 Source_text_preproc_grammar.ml
@@ -110,12 +105,9 @@ Input.mly.old
 Input_types.mli
 Rtlil_input.ml
 Rtlil_input.mli
-Source_generic_top
-Source_reduced_top
 Source_text_verible.ml
 Source_text_verible.mli
 Source_text_verible_lex.ml
-Source_verible_top
 dump_types.mli
 examples/andvec.v
 examples_count0_dump.ml
@@ -127,7 +119,6 @@ verible_pat.ml-e
 *#
 Rtlil_input_lex.ml
 Rtlil_input_old.mly
-Source_text_convert_liberty_top
 Rtlil_input_types.mli
 Source_text_verible_types.mli
 _build/
