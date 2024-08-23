@@ -17,10 +17,10 @@
 )
 
 (rule
- (deps outputparser/myluaclient.exe verify.lua test/hardcaml/multiplier_test.sv library.lua liberty/simcells.lib liberty/NangateOpenCellLibrary_typical.lib)
+ (deps ./myluaclient.exe verify.lua test/hardcaml/multiplier_test.sv library.lua liberty/simcells.lib liberty/NangateOpenCellLibrary_typical.lib)
  (alias runtest)
  (action
-  (run outputparser/myluaclient.exe verify.lua test/hardcaml/multiplier_test.sv)))
+  (run ./myluaclient.exe verify.lua test/hardcaml/multiplier_test.sv)))
 
 (env
   (dev
