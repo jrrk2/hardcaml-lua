@@ -1,3 +1,0 @@
-read_verilog -sv -overwrite examples/multest.v
-synth
-write_ilang examples/multest_ref.rtlil

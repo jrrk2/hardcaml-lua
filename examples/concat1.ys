@@ -1,6 +1,0 @@
-read_ilang concat1.v_dump.rtlil
-write_ilang concat1.ilang
-proc
-write_verilog -noattr concat1.proc
-synth
-write_verilog -noattr concat1.synth

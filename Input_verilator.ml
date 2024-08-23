@@ -521,3 +521,46 @@ let translate errlst xmlf =
         mods := (k, rawtok, d, reformat2 (reformat1 d)) :: !mods) modules;
     let mods = List.sort compare !mods in
     (line,range,rwxml,xml,mods,toplst,topattr,modules,packages,interfaces)
+
+let othmod = ref ("", empty_itms [])
+let othxml = ref (Xml.PCData "")
+
+let read' lst x = try
+  let entry = Unix.readdir x in
+  print_endline entry;
+  lst := entry :: !lst; true with End_of_file -> Unix.closedir x; false
+
+let status f =
+  let stat = Unix.stat f in
+  match stat.st_kind with
+  | S_REG -> f
+  | S_DIR -> let x=Unix.opendir f in
+    let lst = ref [] and busy = ref true in
+    while !busy do busy := read' lst x done; f^"/"^(List.hd !lst)
+  | oth -> failwith "filt type not handled"
+
+let tranxml f' =
+  let f = status f' in
+  print_endline ("tran "^f);
+  let (line,range,rwxml,xml,mods,toplst,topattr,modules,packages,interfaces) = translate () f in
+  let cnvlst = ref [] in
+  Hashtbl.iter (fun k x -> cnvlst := (k,x) :: !cnvlst) modules;
+  !cnvlst
+
+(*
+open Input_hardcaml
+
+let tran f' src =
+  let f = status f' in
+  print_endline ("tran "^f);
+  let (line,range,rwxml,xml,mods,toplst,topattr,modules,packages,interfaces) = translate () f in
+  othxml := xml;
+  if true then Hashtbl.iter (fun k x -> othmod := x; dump' "_check" (k,x)) modules;
+  let liberty, cells = Rtl_map.read_lib (Rtl_map.dflt_liberty None) in
+  Hashtbl.iter (fun modnam (_, modul) -> let rtl = cnv (modnam, modul) in Rtl_dump.dump modnam rtl;
+  dump' "_map" (modnam, ((), (Rtl_map.map cells modnam rtl)))) modules;
+  if Hashtbl.length modules = 1 then Hashtbl.iter (fun modnam (_, modul) -> 
+    print_endline ("Status = "^Input_equiv.eqv modnam);
+    Input_equiv.sta (modnam^"_map.v") modnam liberty) modules
+*)
+    

@@ -529,3 +529,26 @@ and rw'' = function
       EMPTY_TOKEN),
       EMPTY_TOKEN) :: tl)
 | oth :: tl -> oth :: rw'' tl
+
+open Source_text_verible_lex
+open Source_text_verible
+open Verible_pat
+open Verible_typ
+
+let othrawp = ref End_of_file
+let othp = ref End_of_file
+let othp' = ref End_of_file
+let othp'' = ref Vempty
+let othitms = ref (Input_dump.empty_itms [])
+
+let tranlst v =
+  let rawp = parse_output_ast_from_file v in
+  othrawp := rawp;
+  let p = rw rawp in
+  othp := p;
+  let p' = rw' p in
+  othp' := p';
+  let p'' = pat p' in
+  othp'' := p'';
+  print_endline "verible_pat_cnv";
+  Verible_pat.cnv' othitms p''

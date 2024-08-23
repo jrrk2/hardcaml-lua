@@ -16,20 +16,6 @@ let lhash = Hashtbl.create 257
 
 let nxtitm' =
   let itm = ref 0 in fun () -> incr itm; "itm"^string_of_int !itm
-
-(*
-let tranitm lib gold modnam uitms =
-  print_endline "hardcaml_cnv";
-  let rtl = Input_hardcaml.cnv (modnam, uitms) in
-  let yliberty, ycells = Rtl_map.read_lib "liberty/simcells" in
-  let ilang = Cnv_ilang.cnv_ilang modnam (Rtl_map.map ycells modnam rtl) in
-  let _ = Rtlil_dump.dumprtl "_rev" ilang in
-  let _ = Source_generic_main.rewrite_rtlil gold [ilang] in
-  print_endline ("Status = "^eqv modnam);
-  let liberty, cells = Rtl_map.read_lib lib in
-  dump' "_map" (modnam, ((), (Rtl_map.map cells modnam rtl)));
-  sta (modnam^"_map.v") modnam liberty
-*)
   
 let find_cnv itm = match Hashtbl.find lhash itm with
     | Cnvlst (nam, itms) -> nam, itms
@@ -106,25 +92,25 @@ let lhardcnv itm =
   hadd (Rtl (modnam, rtl))
 
 let ltranlst v =
-  let cnvlst = Input_equiv_verible.tranlst v in
+  let cnvlst = Source_text_verible_rewrite.tranlst v in
   let nxtitm = ref "" in
   List.iter (fun (nam,itm) -> nxtitm := hadd (Cnvlst (nam,itm))) cnvlst;
   !nxtitm
 
 let ltranxml f =
-  let cnvlst = Input_equiv_verilator.tranxml f in
+  let cnvlst = Input_verilator.tranxml f in
   let nxtitm = ref "" in
   List.iter (fun (nam,(_,itm)) -> nxtitm := hadd (Cnvlst (nam,itm))) cnvlst;
   !nxtitm
 
 let ltranuhdmall f =
-  let cnvlst = Input_equiv.tranall f in
+  let cnvlst = Input_lex.tranall f in
   let nxtitm = ref "" in
   List.iter (fun (nam,(_,itm)) -> nxtitm := hadd (Cnvlst (nam,itm))) cnvlst;
   !nxtitm
 
 let ltranuhdmtop f =
-  let cnvlst = Input_equiv.trantop f in
+  let cnvlst = Input_lex.trantop f in
   let nxtitm = ref "" in
   List.iter (fun (nam,(_,itm)) -> nxtitm := hadd (Cnvlst (nam,itm))) cnvlst;
   !nxtitm
@@ -167,6 +153,39 @@ let litms () =
   | Sat itms -> itmlst := (k^"\t\tSAT netlist item") :: !itmlst
 ) lhash;
   String.concat "\n" (List.sort compare !itmlst)
+
+let leqv stem =
+  let script = stem^".eqy" in
+  let fd = open_out script in
+  output_string fd ("[options]\n");
+  output_string fd ("\n");
+  output_string fd ("[gold]\n");
+  output_string fd ("read_ilang "^stem^"_gold.ilang\n");
+  output_string fd ("prep -top "^stem^"\n");
+  output_string fd ("\n");
+  output_string fd ("[gate]\n");
+  output_string fd ("read_ilang "^stem^"_rev.ilang\n");
+  output_string fd ("prep -top "^stem^"\n");
+  output_string fd ("\n");
+  output_string fd ("[strategy simple]\n");
+  output_string fd ("use sat\n");
+  output_string fd ("depth 10\n");
+  output_string fd ("\n");
+  close_out fd;
+  string_of_int (Sys.command ("eqy -f "^script))
+
+let lsta gate stem liberty =
+  let env = "STA_"^stem in
+  print_endline env;
+  let script = stem^".tcl" in
+  let fd = open_out script in
+  output_string fd ("read_lib "^liberty^".lib\n");
+  output_string fd ("read_verilog "^gate^"\n");
+  output_string fd ("current_design "^stem^"\n");
+  output_string fd ("link\n");
+  output_string fd (try let cmds = String.concat "\n" (String.split_on_char ';' (Sys.getenv env))^"\n" in print_endline cmds; cmds with _ -> "report_checks -unconstrained\nexit\n");
+  close_out fd;
+  print_endline ("Status = "^string_of_int (Sys.command ("sta -no_splash -threads max -no_init "^script)))
 
 module LuaChar = struct
     type 'a t	    = char
@@ -247,12 +266,13 @@ C.register_module "Pair"
     ] g;
 
     C.register_module "verilator" [
-    "tran", V.efunc (V.string **-> V.string **->> V.unit) (wrap2 Input_equiv_verilator.tran);
+    (*
+     "tran", V.efunc (V.string **-> V.string **->> V.unit) (wrap2 Input_verilator.tran);
+     *)
     "tranxml", V.efunc (V.string **->> V.string) (wrap1 ltranxml);
     ] g;
 
     C.register_module "pipe" [
-    "uhdmtest", V.efunc (V.string **-> V.string **->> V.unit) (wrap2 Input_equiv.tran);
     "uhdmall", V.efunc (V.string **->> V.string) (wrap1 ltranuhdmall);
     "uhdmtop", V.efunc (V.string **->> V.string) (wrap1 ltranuhdmtop);
     "rtlil", V.efunc (V.string **->> V.string) (wrap1 lrtlil);
@@ -274,8 +294,8 @@ C.register_module "Pair"
     ] g;
 
     C.register_module "external" [
-    "eqv", V.efunc (V.string **->> V.string) (wrap1 Input_equiv_verible.eqv);
-    "sta", V.efunc (V.string **-> V.string **-> V.string **->> V.unit) (wrap2 Input_equiv_verible.sta);    
+    "eqv", V.efunc (V.string **->> V.string) (wrap1 leqv);
+    "sta", V.efunc (V.string **-> V.string **-> V.string **->> V.unit) (wrap2 lsta);
     ] g;
 
     C.register_module "z3" [

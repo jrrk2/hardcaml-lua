@@ -434,6 +434,26 @@ let parse_output_ast_from_uhdm_pipe p =
   let _ = Unix.close_process_in ch in
   output
 
+open Input_dump
+open Input_pat4
+
+let p' = ref []
+
+let tranall pipe =
+  print_endline ("tran "^pipe);
+  let cache, p = parse_output_ast_from_uhdm_pipe pipe in
+  p' := p;
+  let uitms = empty_itms [] in
+  let _ = List.map (top_pat uitms) (List.filter (function TUPLE2 (Weaklyreferenced, _) -> false | _ -> true) p) in
+  !(uitms.allmods)
+
+let trantop pipe =
+  print_endline ("tran "^pipe);
+  let cache, p = parse_output_ast_from_uhdm_pipe pipe in
+  p' := p;
+  let uitms = empty_itms [] in
+  let _ = List.map (top_pat uitms) (List.filter (function TUPLE2 (Weaklyreferenced, _) -> false | _ -> true) p) in
+  !(uitms.topmods)
 
 (* *)
 }
