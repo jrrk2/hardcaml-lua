@@ -17,7 +17,7 @@ depends: [
   "ocaml-compiler-libs" {>= "v0.17.0"}
   "xml-light"
   "msat"
-  "menhir" (>= "20240715"}
+  "menhir" {>= "20240715"}
   "hardcaml"
   "hardcaml_circuits" {>= "v0.17.0"}
   "lua-ml"
