@@ -9,6 +9,7 @@ maintainer: ["Jonathan Kimmitt"]
 authors: ["Jonathan Kimmitt"]
 license: "MIT"
 tags: ["Verilator" "Surelog" "UHDM" "Verible" "Yosys" "RTLIL"]
+available: [ os != "win32" ]
 homepage: "https://github.com/jrrk2/vpiparse"
 bug-reports: "https://github.com/jrrk2/vpiparse/issues"
 depends: [

@@ -2,12 +2,12 @@
 (using menhir 2.1)
 
 (name hardcaml-lua)
-(version opam-publish-hardcaml-lua.0.0.1-dirty)
+(version)
 
 (generate_opam_files true)
 
 (source
- (github jrrk2/vpiparse))
+ (github jrrk2/hardcaml-lua))
 
 (authors "Jonathan Kimmitt")
 
