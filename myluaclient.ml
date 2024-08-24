@@ -299,7 +299,6 @@ C.register_module "Pair"
     ] g;
 
     C.register_module "z3" [
-    "example", V.efunc (V.unit **->> V.int) (wrap1 Z3_example.z3_example);
     "cmp", V.efunc (V.string **-> V.string **->> V.string) (wrap2 lcmpz3);    
     ] g;
 
