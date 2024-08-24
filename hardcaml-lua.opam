@@ -16,8 +16,9 @@ depends: [
   "dune" {>= "3.7"}
   "xml-light"
   "msat"
+  "menhir"
   "hardcaml"
-  "hardcaml_circuits"
+  "hardcaml_circuits" {>= "v0.17.0"}
   "lua-ml"
   "ppx_deriving_yojson"
   "z3"
