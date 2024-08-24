@@ -14,7 +14,6 @@
     (progn (echo "flambda enabled, you lose"))))
 
 (executable
- (deps flambda)
  (name myluaclient)
  (public_name hardcaml-lua)
  (modules_without_implementation output_types Source_text_verible_rewrite_types)
