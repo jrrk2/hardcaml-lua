@@ -3,7 +3,7 @@
 
 (name hardcaml-lua)
 
-(generate_opam_files false)
+(generate_opam_files true)
 
 (source
  (github jrrk2/hardcaml-lua))
