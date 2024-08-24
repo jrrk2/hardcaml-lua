@@ -8,10 +8,11 @@ maintainer: ["Jonathan Kimmitt"]
 authors: ["Jonathan Kimmitt"]
 license: "MIT"
 tags: ["Verilator" "Surelog" "UHDM" "Verible" "Yosys" "RTLIL"]
-available: [ os != "win32" & ocaml-version != "ocaml-5.2-flambda" & ocaml-version != "riscv64-ocaml-5.2" ]
+available: [ os != "win32" & os != "riscv64" ]
 homepage: "https://github.com/jrrk2/hardcaml-lua"
 bug-reports: "https://github.com/jrrk2/hardcaml-lua/issues"
 depends: [
+  "ocaml" { != "ocaml-5.2-flambda" }
   "dune" {>= "3.7"}
   "xml-light"
   "msat"
