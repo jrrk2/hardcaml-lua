@@ -7,6 +7,11 @@
   (flags -la 2)
 )
 
+(rule
+  (enabled_if (= %{ocaml-config:flambda} true))
+  (action
+    (progn (echo "flambda enabled, you lose))))
+
 (executable
  (name myluaclient)
  (public_name hardcaml-lua)
