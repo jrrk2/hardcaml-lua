@@ -8,14 +8,16 @@ maintainer: ["Jonathan Kimmitt"]
 authors: ["Jonathan Kimmitt"]
 license: "MIT"
 tags: ["Verilator" "Surelog" "UHDM" "Verible" "Yosys" "RTLIL"]
+available: [ os != "win32" ]
 homepage: "https://github.com/jrrk2/hardcaml-lua"
 bug-reports: "https://github.com/jrrk2/hardcaml-lua/issues"
 depends: [
   "dune" {>= "3.7"}
   "xml-light"
   "msat"
+  "menhir" {>= "20240715"}
   "hardcaml"
-  "hardcaml_circuits"
+  "hardcaml_circuits" {>= "v0.17.0"}
   "lua-ml"
   "ppx_deriving_yojson"
   "z3"
