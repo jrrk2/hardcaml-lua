@@ -14,7 +14,6 @@ homepage: "https://github.com/jrrk2/hardcaml-lua"
 bug-reports: "https://github.com/jrrk2/hardcaml-lua/issues"
 depends: [
   "dune" {>= "3.7"}
-  "ocaml-compiler-libs" {>= "v0.17.0"}
   "xml-light"
   "msat"
   "menhir" {>= "20240715"}
