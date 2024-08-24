@@ -2,7 +2,6 @@
 (using menhir 2.1)
 
 (name hardcaml-lua)
-(version)
 
 (generate_opam_files true)
 
