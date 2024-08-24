@@ -9,6 +9,7 @@
 
 (rule
   (enabled_if (= %{ocaml-config:flambda} true))
+  (alias flambda)
   (action
     (progn (echo "flambda enabled, you lose"))))
 
