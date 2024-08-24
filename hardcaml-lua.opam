@@ -12,6 +12,7 @@ available: [ os != "win32" ]
 homepage: "https://github.com/jrrk2/hardcaml-lua"
 bug-reports: "https://github.com/jrrk2/hardcaml-lua/issues"
 depends: [
+  "ocaml" {ocaml-version != "ocaml-5.2-flambda" & ocaml-version != "riscv64-ocaml-5.2"}
   "dune" {>= "3.7"}
   "xml-light"
   "msat"
