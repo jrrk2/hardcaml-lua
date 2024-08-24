@@ -9,9 +9,9 @@ maintainer: ["Jonathan Kimmitt"]
 authors: ["Jonathan Kimmitt"]
 license: "MIT"
 tags: ["Verilator" "Surelog" "UHDM" "Verible" "Yosys" "RTLIL"]
-available: [ os != "win32" ]
-homepage: "https://github.com/jrrk2/vpiparse"
-bug-reports: "https://github.com/jrrk2/vpiparse/issues"
+available: [ os != "windows-latest" ]
+homepage: "https://github.com/jrrk2/hardcaml-lua"
+bug-reports: "https://github.com/jrrk2/hardcaml-lua/issues"
 depends: [
   "dune" {>= "3.7"}
   "xml-light"
@@ -37,4 +37,4 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/jrrk2/vpiparse.git"
+dev-repo: "git+https://github.com/jrrk2/hardcaml-lua.git"
