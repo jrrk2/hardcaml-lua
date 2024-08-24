@@ -8,6 +8,9 @@ maintainer: ["Jonathan Kimmitt"]
 authors: ["Jonathan Kimmitt"]
 license: "MIT"
 tags: ["Verilator" "Surelog" "UHDM" "Verible" "Yosys" "RTLIL"]
+# This option excludes RISCV because there are insufficient regression stations
+# to complete in a timely manner and win32 because Z3 apparently does not work
+# and flambda because it hangs (or takes a very long time) on my code for the present time.
 available: [ os != "win32" & os != "riscv64" & "ocamlopt-config:flambda = false" ]
 homepage: "https://github.com/jrrk2/hardcaml-lua"
 bug-reports: "https://github.com/jrrk2/hardcaml-lua/issues"
