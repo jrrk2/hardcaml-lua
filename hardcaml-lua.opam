@@ -15,7 +15,6 @@ available: [ os != "win32" ]
 homepage: "https://github.com/jrrk2/hardcaml-lua"
 bug-reports: "https://github.com/jrrk2/hardcaml-lua/issues"
 depends: [
-  "ocaml" { < "5.2.0" }
   "dune" {>= "3.7"}
   "xml-light"
   "msat"
@@ -26,6 +25,9 @@ depends: [
   "ppx_deriving_yojson"
   "z3"
   "odoc" {with-doc}
+]
+x-ci-accept-failures: [
+  "ocaml-variants.5+flambda"
 ]
 build: [
   ["dune" "subst"] {dev}
