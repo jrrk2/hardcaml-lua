@@ -1,3 +1,5 @@
+#!/usr/bin/env hardcaml-lua
+
 function factorial(n)
   local x = 1
   i = 2
@@ -8,4 +10,6 @@ function factorial(n)
   return x
 end
 
-print("fact=",factorial(6))
+n=6
+print("fact("..n..")="..factorial(n))
+exit()
