@@ -324,7 +324,7 @@ let cmdline verbose eval itm =
   if verbose then print_endline ("argv: "^itm);
   let fd = open_in itm in
   let itm = ref "" in
-  try while true do let s = input_line fd in itm := !itm ^ "\n" ^ s done with _ -> ();
+  try while true do let s = input_line fd in if String.length s < 2 || String.sub s 0 2 <> "#!" || !itm <> "" then itm := !itm ^ "\n" ^ s done with _ -> ();
   close_in fd;
   if verbose then print_endline ("eval: "^ !itm);
   try eval !itm with e -> print_endline (Printexc.to_string_default e)
