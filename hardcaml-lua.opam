@@ -26,8 +26,8 @@ depends: [
   "z3"
   "odoc" {with-doc}
 ]
-x-ci-accept-failures: [
-  "ocaml-variants.5+flambda"
+conflicts: [
+  "ocaml-option-flambda"
 ]
 build: [
   ["dune" "subst"] {dev}
