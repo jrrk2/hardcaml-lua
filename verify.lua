@@ -1,3 +1,5 @@
+#!/usr/bin/env hardcaml-lua
+
 dofile("library.lua")
 
 print("Hello".."UHDM/Verilator")
