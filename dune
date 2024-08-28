@@ -12,7 +12,7 @@
  (public_name hardcaml-lua)
  (modules_without_implementation output_types Source_text_verible_rewrite_types)
  (modules Input Input_cnv Formula Formula_types dump_types ord_input Rtlil_input Input Input_dump Source_text_types Source_text_verible_tokens Source_text_verible_lex Source_text_verible_types Source_text_rewrite_types File File_lex File_rewrite Input_types Source_text_verible Source_text_verible_lex Rtlil_input Source_text_verible Source_text_verible_types output_types Rtlil_input_types Rtlil_input_types Rtlil_input_types Source_text_verible_types Source_text_verible_types Source_text_verible_types Rtlil_input_lex String_lit String_lit Msat_sat_slit Msat_sat_slit Msat_tseitin Msat_tseitin Rtlil_input_rewrite_types Source_text_rewrite_types generic_rewrite Rtlil_input_types Source_text_verible_types Rtlil_input_types Source_text_verible_rewrite_types Source_text_verible_rewrite verible_typ verible_pat rtl_lexer rtl_dump Rtlil_dump Rtlil_input_rewrite dump_rtlil convert_edited rtl_parser Input_hardcaml Formula_lex z3_example Input_pat4 formula_rewrite rtl_map Input_lex Input_verilator cnv_ilang Source_generic_main myluaclient)
- (libraries xml-light msat hardcaml hardcaml_circuits unix lua-ml ppx_deriving_yojson z3)
+ (libraries xml-light msat hardcaml hardcaml_circuits unix lua-ml ppx_deriving_yojson (select z3_example.ml from (z3 -> z3_example.real.ml) (-> z3_example.dummy.ml)))
  (preprocess (pps ppx_deriving_yojson))
 )
 
