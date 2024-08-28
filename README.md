@@ -111,6 +111,13 @@ Tutorial:
   The released version requires an explicit call of the executable:
 
     hardcaml-lua verify.lua blocking_add.sv
+
+  The output of the tool will look like this if all optional tools are installed. The optional tools are:
+
+      sta from the package opensta
+      yosys from the package yosys
+      eqy manually installed as per these instructions: https://yosyshq.readthedocs.io/projects/eqy/en/latest/install.html#eqy
+      
     HelloUHDM/Verilator
     verible_pat_cnv
     transeq1
